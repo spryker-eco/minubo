@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Minubo\Persistence" package="src.Orm.Zed.Minubo.Persistence">
+
+    <table name="spy_minubo_run" idMethod="native" phpName="SpyMinuboRun">
+        <column name="id_minubo_run" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="ran_at" type="TIMESTAMP" required="true"/>
+
+        <id-method-parameter value="spy_minubo_run_pk_seq"/>
+    </table>
+
+</database>
