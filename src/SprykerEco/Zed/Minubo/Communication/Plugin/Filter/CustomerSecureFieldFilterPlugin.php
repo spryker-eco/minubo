@@ -11,6 +11,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface;
 
 /**
+ * @method \SprykerEco\Zed\Minubo\MinuboConfig getConfig()
  * @method \SprykerEco\Zed\Minubo\Communication\MinuboCommunicationFactory getFactory()
  * @method \SprykerEco\Zed\Minubo\Business\MinuboFacadeInterface getFacade()
  */
