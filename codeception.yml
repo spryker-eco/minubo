@@ -1,4 +1,4 @@
-nclude:
+include:
     - tests/SprykerEcoTest/Zed/Minubo
 
 paths:
