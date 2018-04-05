@@ -23,8 +23,7 @@ class CustomerSecureFieldFilterPlugin extends AbstractPlugin implements MinuboDa
      */
     public function filterData(array $data): array
     {
-        $secureFields = $this->getFactory()
-            ->getConfig()
+        $secureFields = $this->getConfig()
             ->getCustomerSecureFields();
         foreach ($data as $key => $value) {
             if (in_array($key, $secureFields)) {

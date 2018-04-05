@@ -33,8 +33,7 @@ class RecursionFieldFilterPlugin extends AbstractPlugin implements MinuboDataFil
      */
     protected function unsetRecursionFields(array $data): array
     {
-        $recursionValue = $this->getFactory()
-            ->getConfig()
+        $recursionValue = $this->getConfig()
             ->getRecursionValue();
         foreach ($data as $key => $item) {
             if (is_array($item)) {
