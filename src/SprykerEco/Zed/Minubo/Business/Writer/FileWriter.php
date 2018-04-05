@@ -1,10 +1,9 @@
 <?php
 
 /**
- * This file is part of the Spryker Suite.
- * For full license information, please view the LICENSE file that was distributed with this source code.
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
-
 namespace SprykerEco\Zed\Minubo\Business\Writer;
 
 use Generated\Shared\Transfer\FileSystemContentTransfer;
