@@ -17,22 +17,22 @@ class CustomerDataExporter implements DataExporterInterface
     /**
      * @var \SprykerEco\Zed\Minubo\Persistence\MinuboRepositoryInterface
      */
-    private $repository;
+    protected $repository;
 
     /**
      * @var \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
      */
-    private $filterPlugins;
+    protected $filterPlugins;
 
     /**
      * @var \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
      */
-    private $expanderPlugins;
+    protected $expanderPlugins;
 
     /**
      * @var \SprykerEco\Zed\Minubo\Business\Writer\WriterInterface
      */
-    private $writer;
+    protected $writer;
 
     /**
      * @param \SprykerEco\Zed\Minubo\Persistence\MinuboRepositoryInterface $repository
