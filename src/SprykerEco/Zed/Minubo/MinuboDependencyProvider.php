@@ -12,6 +12,7 @@ use Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 use SprykerEco\Zed\Minubo\Communication\Plugin\Expander\StateFlagExpanderPlugin;
+use SprykerEco\Zed\Minubo\Communication\Plugin\Filter\CustomerCountryAddressesFieldFilterPlugin;
 use SprykerEco\Zed\Minubo\Communication\Plugin\Filter\CustomerSecureFieldFilterPlugin;
 use SprykerEco\Zed\Minubo\Communication\Plugin\Filter\RecursionFieldFilterPlugin;
 use SprykerEco\Zed\Minubo\Communication\Plugin\MinuboCustomerExportPlugin;
@@ -225,6 +226,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
     {
         return [
             new CustomerSecureFieldFilterPlugin(),
+            new CustomerCountryAddressesFieldFilterPlugin(),
             new RecursionFieldFilterPlugin(),
         ];
     }
