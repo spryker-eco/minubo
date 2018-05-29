@@ -20,9 +20,8 @@ $config[FileSystemConstants::FILESYSTEM_SERVICE] = [
 $config[MinuboConstants::MINUBO_FILE_SYSTEM_NAME] = 'minubo';
 $config[MinuboConstants::MINUBO_BUCKET_DIRECTORY] = '/minubo/data/';
 $config[MinuboConstants::MINUBO_CUSTOMER_SECURE_FIELDS] = [
-    'Password',
-    'RestorePasswordKey',
-    'RestorePasswordDate',
-    'RegistrationKey',
+    'password',
+    'restore_password_date',
+    'restore_password_key',
+    'registration_key',
 ];
-$config[MinuboConstants::MINUBO_RECURSION_VALUE] = '*RECURSION*';

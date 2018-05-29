@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Minubo\Persistence;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerAddressTableMap;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Oms\Persistence\Map\SpyOmsOrderProcessTableMap;
+use Orm\Zed\Oms\Persistence\Map\SpyOmsTransitionLogTableMap;
 use Orm\Zed\ProductBundle\Persistence\Map\SpySalesOrderItemBundleTableMap;
 use Orm\Zed\Sales\Persistence\Map\SpySalesOrderAddressTableMap;
 use Orm\Zed\Sales\Persistence\Map\SpySalesOrderItemTableMap;
@@ -17,6 +18,7 @@ use Orm\Zed\Sales\Persistence\Map\SpySalesOrderTableMap;
 use Orm\Zed\Sales\Persistence\Map\SpySalesOrderTotalsTableMap;
 use Orm\Zed\Sales\Persistence\Map\SpySalesShipmentTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
+use Propel\Runtime\Formatter\ArrayFormatter;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -54,17 +56,19 @@ class MinuboRepository extends AbstractRepository implements MinuboRepositoryInt
             ->getSalesOrderQuery()
             ->leftJoinWithOrderTotal()
             ->leftJoinWithLocale()
-            ->leftJoinWithItem()
             ->leftJoinWithSpySalesShipment()
-            ->useItemQuery(null, Criteria::LEFT_JOIN)
+            ->leftJoinWithItem()
+            ->useItemQuery()
                 ->leftJoinWithSalesOrderItemBundle()
                 ->leftJoinWithProcess()
                 ->leftJoinWithState()
+                ->leftJoinWithTransitionLog()
             ->endUse()
             ->leftJoinBillingAddress('BillingAddress')
             ->with('BillingAddress')
             ->leftJoinShippingAddress('ShippingAddress')
-            ->with('ShippingAddress');
+            ->with('ShippingAddress')
+            ->setFormatter(ArrayFormatter::class);
 
         if ($lastRunTime) {
             $query->addAnd(SpySalesOrderTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
@@ -73,7 +77,8 @@ class MinuboRepository extends AbstractRepository implements MinuboRepositoryInt
                 ->addOr(SpySalesOrderAddressTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
                 ->addOr(SpySalesOrderItemBundleTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
                 ->addOr(SpyOmsOrderProcessTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
-                ->addOr(SpySalesShipmentTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
+                ->addOr(SpySalesShipmentTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
+                ->addOr(SpyOmsTransitionLogTableMap::COL_CREATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
         }
 
         return $query->find()->toArray();
@@ -90,10 +95,11 @@ class MinuboRepository extends AbstractRepository implements MinuboRepositoryInt
             ->getCustomerQuery()
             ->leftJoinWithLocale()
             ->leftJoinWithAddress()
-            ->useAddressQuery(null, Criteria::LEFT_JOIN)
+            ->useAddressQuery()
                 ->leftJoinWithRegion()
                 ->leftJoinWithCountry()
-            ->endUse();
+            ->endUse()
+            ->setFormatter(ArrayFormatter::class);
 
         if ($lastRunTime) {
             $query->addAnd(SpyCustomerTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)

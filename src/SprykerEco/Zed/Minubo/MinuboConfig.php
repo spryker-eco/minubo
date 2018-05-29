@@ -29,14 +29,6 @@ class MinuboConfig extends AbstractBundleConfig
     }
 
     /**
-     * @return string
-     */
-    public function getRecursionValue(): string
-    {
-        return $this->get(MinuboConstants::MINUBO_RECURSION_VALUE);
-    }
-
-    /**
      * @return array
      */
     public function getCustomerSecureFields(): array

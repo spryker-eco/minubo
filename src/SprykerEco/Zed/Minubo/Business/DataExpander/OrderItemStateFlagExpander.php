@@ -13,8 +13,12 @@ class OrderItemStateFlagExpander implements OrderItemStateFlagExpanderInterface
     const KEY_ITEMS = 'Items';
     const KEY_PROCESS = 'Process';
     const KEY_STATE = 'State';
-    const KEY_NAME = 'Name';
+    const KEY_NAME = 'name';
     const KEY_OMS_STATE_FLAGS = 'OmsStateFlags';
+
+    const KEY_TRANSITION_LOG = 'TransitionLogs';
+    const KEY_TARGET_STATE = 'target_state';
+    const KEY_OMS_TARGET_STATE_FLAGS = 'OmsTargetStateFlags';
 
     /**
      * @var array
@@ -46,6 +50,12 @@ class OrderItemStateFlagExpander implements OrderItemStateFlagExpanderInterface
             $processName = $item[static::KEY_PROCESS][static::KEY_NAME];
             $stateName = $item[static::KEY_STATE][static::KEY_NAME];
             $data[static::KEY_ITEMS][$key][static::KEY_OMS_STATE_FLAGS] = $this->getOmsStateFlags($processName, $stateName);
+
+            foreach ($item[static::KEY_TRANSITION_LOG] as $trKey => $transition) {
+                $targetState = $transition[static::KEY_TARGET_STATE];
+                $data[static::KEY_ITEMS][$key][static::KEY_TRANSITION_LOG][$trKey][static::KEY_OMS_TARGET_STATE_FLAGS] =
+                    $this->getOmsStateFlags($processName, $targetState);
+            }
         }
         return $data;
     }
