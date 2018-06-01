@@ -95,7 +95,7 @@ class MinuboRepository extends AbstractRepository implements MinuboRepositoryInt
             ->getCustomerQuery()
             ->leftJoinWithLocale()
             ->leftJoinWithAddress()
-            ->useAddressQuery()
+            ->useAddressQuery(null, Criteria::LEFT_JOIN)
                 ->leftJoinWithRegion()
                 ->leftJoinWithCountry()
             ->endUse()
