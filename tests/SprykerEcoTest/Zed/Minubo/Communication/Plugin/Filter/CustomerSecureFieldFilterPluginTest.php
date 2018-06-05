@@ -14,6 +14,13 @@ use SprykerEco\Zed\Minubo\Persistence\MinuboRepository;
 
 class CustomerSecureFieldFilterPluginTest extends Unit
 {
+    private $secureFields = [
+        'password',
+        'restore_password_date',
+        'restore_password_key',
+        'registration_key',
+    ];
+
     /**
      * @var \Generated\Shared\Transfer\CustomerTransfer
      */
@@ -25,11 +32,6 @@ class CustomerSecureFieldFilterPluginTest extends Unit
     private $plugin;
 
     /**
-     * @var \SprykerEco\Zed\Minubo\MinuboConfig
-     */
-    private $minuboConfig;
-
-    /**
      * @return void
      */
     public function setUp()
@@ -38,7 +40,6 @@ class CustomerSecureFieldFilterPluginTest extends Unit
 
         $this->customer = $this->tester->haveCustomer();
         $this->plugin = new CustomerSecureFieldFilterPlugin();
-        $this->minuboConfig = new MinuboConfig();
     }
 
     /**
@@ -51,9 +52,7 @@ class CustomerSecureFieldFilterPluginTest extends Unit
 
         $result = $this->plugin->filterData($customerData[0]);
 
-        $secureFields = $this->minuboConfig->getCustomerSecureFields();
-
-        foreach ($secureFields as $field) {
+        foreach ($this->secureFields as $field) {
             $this->assertArrayNotHasKey($field, $result);
         }
     }
