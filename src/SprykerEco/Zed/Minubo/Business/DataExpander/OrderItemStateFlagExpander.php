@@ -52,6 +52,9 @@ class OrderItemStateFlagExpander implements OrderItemStateFlagExpanderInterface
             $data[static::KEY_ITEMS][$key][static::KEY_OMS_STATE_FLAGS] = $this->getOmsStateFlags($processName, $stateName);
 
             foreach ($item[static::KEY_TRANSITION_LOG] as $trKey => $transition) {
+                if (!array_key_exists(static::KEY_TARGET_STATE, $transition)) {
+                    continue;
+                }
                 $targetState = $transition[static::KEY_TARGET_STATE];
                 $data[static::KEY_ITEMS][$key][static::KEY_TRANSITION_LOG][$trKey][static::KEY_OMS_TARGET_STATE_FLAGS] =
                     $this->getOmsStateFlags($processName, $targetState);

@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\Minubo;
 
 use Codeception\Actor;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -23,10 +24,11 @@ use Codeception\Actor;
  *
  * @SuppressWarnings(PHPMD)
  */
-class MinuboBusinessTester extends Actor
+class MinuboZedTester extends Actor
 {
-    use _generated\MinuboBusinessTesterActions;
-    /**
-     * Define custom actions here
-     */
+    use _generated\MinuboZedTesterActions;
+
+   /**
+    * Define custom actions here
+    */
 }

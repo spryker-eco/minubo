@@ -1,3 +1,5 @@
+namespace: SprykerEcoTest
+
 include:
     - tests/SprykerEcoTest/Zed/Minubo
 
@@ -17,6 +19,4 @@ settings:
 
 coverage:
     enabled: true
-    whitelist:
-        include:
-            - 'src/*'
+    whitelist: { include: ['src/*'] }
