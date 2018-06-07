@@ -58,7 +58,7 @@ class MinuboRepository extends AbstractRepository implements MinuboRepositoryInt
             ->leftJoinWithLocale()
             ->leftJoinWithSpySalesShipment()
             ->leftJoinWithItem()
-            ->useItemQuery()
+            ->useItemQuery(null, Criteria::LEFT_JOIN)
                 ->leftJoinWithSalesOrderItemBundle()
                 ->leftJoinWithProcess()
                 ->leftJoinWithState()
@@ -71,14 +71,13 @@ class MinuboRepository extends AbstractRepository implements MinuboRepositoryInt
             ->setFormatter(ArrayFormatter::class);
 
         if ($lastRunTime) {
-            $query->addAnd(SpySalesOrderTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
-                ->addOr(SpySalesOrderTotalsTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
-                ->addOr(SpySalesOrderItemTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
-                ->addOr(SpySalesOrderAddressTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
-                ->addOr(SpySalesOrderItemBundleTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
-                ->addOr(SpyOmsOrderProcessTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
-                ->addOr(SpySalesShipmentTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
-                ->addOr(SpyOmsTransitionLogTableMap::COL_CREATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
+            $query->addAnd(SpySalesOrderTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
+            $query->addOr(SpySalesOrderTotalsTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
+            $query->addOr(SpySalesOrderItemTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
+            $query->addOr(SpySalesOrderItemBundleTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
+            $query->addOr(SpyOmsOrderProcessTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
+            $query->addOr(SpySalesShipmentTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
+            $query->addOr(SpyOmsTransitionLogTableMap::COL_CREATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
         }
 
         return $query->find()->toArray();

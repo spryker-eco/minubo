@@ -33,6 +33,6 @@ class MinuboConfig extends AbstractBundleConfig
      */
     public function getCustomerSecureFields(): array
     {
-        return $this->get(MinuboConstants::MINUBO_CUSTOMER_SECURE_FIELDS);
+        return $this->get(MinuboConstants::MINUBO_CUSTOMER_SECURE_FIELDS, []);
     }
 }
