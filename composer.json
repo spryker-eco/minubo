@@ -4,7 +4,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "league/flysystem-aws-s3-v3": "^1.0.0",
+        "spryker/flysystem-aws3v3-file-system": "^1.0.0",
         "spryker/file-system": "^1.0.0",
         "spryker/oms": "^8.1.0",
         "spryker/sales": "^8.0.0",
