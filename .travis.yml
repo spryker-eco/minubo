@@ -1,0 +1,49 @@
+language: php
+
+env:
+  global:
+    - APPLICATION_ENV=devtest
+    - APPLICATION_STORE=DE
+    - PROJECT=demoshop
+    - MODULE_DIR=module
+    - SHOP_DIR=current
+    - MODULE_NAME=minubo
+
+matrix:
+  fast_finish: true
+  include:
+     - php: 7.1
+
+addons:
+  postgresql: 9.6
+  mysql: 5.7
+
+  apt:
+    packages:
+      - graphviz
+
+  hosts:
+    - zed.de.spryker.test
+    - www.de.spryker.test
+
+cache:
+  directories:
+    - $SHOP_DIR/current/vendor
+    - $HOME/.composer/cache
+
+services:
+  - postgresql
+  - redis
+  - rabbitmq
+
+sudo: required
+
+before_install:
+  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+script:
+  - git clone -b '0.1.1' --single-branch https://github.com/spryker-eco/eco-ci.git ecoci
+  - ./ecoci/build/travis.sh
+
+notifications:
+  email: false
