@@ -18,14 +18,23 @@ use SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface;
 class CustomerSecureFieldFilterPlugin extends AbstractPlugin implements MinuboDataFilterInterface
 {
     /**
+     * @var array
+     */
+    protected $defaultFilterFields = [
+        'password',
+        'restore_password_date',
+        'restore_password_key',
+        'registration_key',
+    ];
+
+    /**
      * @param array $data
      *
      * @return array
      */
     public function filterData(array $data): array
     {
-        $secureFields = $this->getConfig()
-            ->getCustomerSecureFields();
+        $secureFields = $this->getFilterFields();
         foreach ($data as $key => $value) {
             if (in_array($key, $secureFields)) {
                 unset($data[$key]);
@@ -33,5 +42,16 @@ class CustomerSecureFieldFilterPlugin extends AbstractPlugin implements MinuboDa
         }
 
         return $data;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getFilterFields()
+    {
+        $configFields = $this->getConfig()
+            ->getCustomerSecureFields();
+
+        return array_merge($configFields, $this->defaultFilterFields);
     }
 }
