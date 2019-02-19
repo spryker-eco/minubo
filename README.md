@@ -1,4 +1,4 @@
-# MinuboModule
+# Minubo Module
 
 Spryker Eco Minubo module.
 
