@@ -86,7 +86,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface[]
      */
-    protected function getExportPlugins()
+    public function getExportPlugins()
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_EXPORT_PLUGINS_STACK);
     }
@@ -94,7 +94,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
      */
-    protected function getCustomerDataFilterPlugins()
+    public function getCustomerDataFilterPlugins()
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK);
     }
@@ -102,7 +102,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
      */
-    protected function getOrderDataFilterPlugins()
+    public function getOrderDataFilterPlugins()
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK);
     }
@@ -110,7 +110,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
      */
-    protected function getCustomerDataExpandPlugins()
+    public function getCustomerDataExpandPlugins()
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK);
     }
@@ -118,7 +118,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
      */
-    protected function getOrderDataExpandPlugins()
+    public function getOrderDataExpandPlugins()
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK);
     }
@@ -126,7 +126,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Minubo\Dependency\Service\MinuboToUtilEncodingServiceInterface
      */
-    protected function getUtilEncodingService()
+    public function getUtilEncodingService()
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::SERVICE_UTIL_ENCODING);
     }
@@ -134,7 +134,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Minubo\Dependency\Service\MinuboToFileSystemServiceInterface
      */
-    protected function getFileSystemService()
+    public function getFileSystemService()
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::SERVICE_FILE_SYSTEM);
     }
@@ -142,7 +142,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Minubo\Dependency\Facade\MinuboToOmsFacadeInterface
      */
-    protected function getOmsFacade()
+    public function getOmsFacade()
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::FACADE_OMS);
     }
