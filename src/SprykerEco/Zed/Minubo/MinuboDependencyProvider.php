@@ -76,9 +76,10 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addEncodingService(Container $container): Container
     {
-        $container[static::SERVICE_UTIL_ENCODING] = function (Container $container) {
+        $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
             return new MinuboToUtilEncodingServiceBridge($container->getLocator()->utilEncoding()->service());
-        };
+        });
+
         return $container;
     }
 
@@ -89,9 +90,10 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addFileSystemService(Container $container): Container
     {
-        $container[static::SERVICE_FILE_SYSTEM] = function (Container $container) {
+        $container->set(static::SERVICE_FILE_SYSTEM, function (Container $container) {
             return new MinuboToFileSystemServiceBridge($container->getLocator()->fileSystem()->service());
-        };
+        });
+
         return $container;
     }
 
@@ -102,10 +104,19 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addOmsFacade(Container $container): Container
     {
-        $container[static::FACADE_OMS] = function (Container $container) {
+        $container->set(static::FACADE_OMS, function (Container $container) {
             return new MinuboToOmsFacadeBridge($container->getLocator()->oms()->facade());
-        };
+        });
+
         return $container;
+    }
+
+    /**
+     * @return \Orm\Zed\Customer\Persistence\SpyCustomerQuery
+     */
+    protected function getCustomerQuery(): SpyCustomerQuery
+    {
+        return SpyCustomerQuery::create();
     }
 
     /**
@@ -115,11 +126,19 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function addCustomerQuery(Container $container)
     {
-        $container[static::PROPEL_QUERY_CUSTOMER] = function (Container $container) {
-            return SpyCustomerQuery::create();
-        };
+        $container->set(static::PROPEL_QUERY_CUSTOMER, function (Container $container) {
+            $this->getCustomerQuery();
+        });
 
         return $container;
+    }
+
+    /**
+     * @return \Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
+     */
+    protected function getSalesOrderQuery(): SpySalesOrderQuery
+    {
+        return SpySalesOrderQuery::create();
     }
 
     /**
@@ -129,9 +148,9 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function addSalesOrderQuery(Container $container)
     {
-        $container[static::PROPEL_QUERY_SALES_ORDER] = function (Container $container) {
-            return SpySalesOrderQuery::create();
-        };
+        $container->set(static::PROPEL_QUERY_SALES_ORDER, function (Container $container) {
+            return $this->getSalesOrderQuery();
+        });
 
         return $container;
     }
@@ -143,9 +162,9 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function addExportPlugins(Container $container)
     {
-        $container[static::MINUBO_EXPORT_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_EXPORT_PLUGINS_STACK, function (Container $container) {
             return $this->getMinuboExportPluginStack();
-        };
+        });
 
         return $container;
     }
@@ -168,9 +187,9 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addCustomerDataFilterPlugins($container)
     {
-        $container[static::MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK, function (Container $container) {
             return $this->getCustomerDataFilterPluginStack();
-        };
+        });
 
         return $container;
     }
@@ -182,9 +201,9 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addOrderDataFilterPlugins($container)
     {
-        $container[static::MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK, function (Container $container) {
             return $this->getOrderDataFilterPluginStack();
-        };
+        });
 
         return $container;
     }
@@ -196,9 +215,9 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addCustomerDataExpanderPlugins($container)
     {
-        $container[static::MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK, function (Container $container) {
             return $this->getCustomerDataExpanderPluginStack();
-        };
+        });
 
         return $container;
     }
@@ -210,9 +229,9 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addOrderDataExpanderPlugins($container)
     {
-        $container[static::MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK, function (Container $container) {
             return $this->getOrderDataExpanderPluginStack();
-        };
+        });
 
         return $container;
     }
