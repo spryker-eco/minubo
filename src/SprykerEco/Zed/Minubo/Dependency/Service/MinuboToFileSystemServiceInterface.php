@@ -14,9 +14,9 @@ interface MinuboToFileSystemServiceInterface
     /**
      * @param \Generated\Shared\Transfer\FileSystemContentTransfer $fileSystemContentTransfer
      *
-     * @throws \Spryker\Service\FileSystem\Dependency\Exception\FileSystemWriteException
+     * @throws \Spryker\Service\FileSystemExtension\Dependency\Exception\FileSystemWriteException
      *
      * @return void
      */
-    public function put(FileSystemContentTransfer $fileSystemContentTransfer): void;
+    public function write(FileSystemContentTransfer $fileSystemContentTransfer): void;
 }
