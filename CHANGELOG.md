@@ -1,3 +1,3 @@
 # Minubo Changelog
 
-TODO
+[Release Changelog](https://github.com/spryker-eco/minubo/releases)
