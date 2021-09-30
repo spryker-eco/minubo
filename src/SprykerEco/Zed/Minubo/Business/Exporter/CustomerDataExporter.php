@@ -20,12 +20,12 @@ class CustomerDataExporter implements DataExporterInterface
     protected $repository;
 
     /**
-     * @var \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
+     * @var array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface>
      */
     protected $filterPlugins;
 
     /**
-     * @var \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
+     * @var array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface>
      */
     protected $expanderPlugins;
 
@@ -36,8 +36,8 @@ class CustomerDataExporter implements DataExporterInterface
 
     /**
      * @param \SprykerEco\Zed\Minubo\Persistence\MinuboRepositoryInterface $repository
-     * @param \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[] $filterPlugins
-     * @param \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[] $expanderPlugins
+     * @param array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface> $filterPlugins
+     * @param array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface> $expanderPlugins
      * @param \SprykerEco\Zed\Minubo\Business\Writer\WriterInterface $writer
      */
     public function __construct(
@@ -69,7 +69,7 @@ class CustomerDataExporter implements DataExporterInterface
     }
 
     /**
-     * @param array $customers
+     * @param array<mixed> $customers
      *
      * @return array
      */
@@ -85,7 +85,7 @@ class CustomerDataExporter implements DataExporterInterface
     }
 
     /**
-     * @param array $customers
+     * @param array<mixed> $customers
      *
      * @return array
      */

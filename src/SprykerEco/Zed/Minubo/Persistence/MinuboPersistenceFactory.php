@@ -21,7 +21,7 @@ class MinuboPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Minubo\Persistence\SpyMinuboRunQuery
      */
-    public function createMinuboRunQuery()
+    public function createMinuboRunQuery(): SpyMinuboRunQuery
     {
         return new SpyMinuboRunQuery();
     }

@@ -42,7 +42,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideBusinessLayerDependencies(Container $container)
+    public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = $this->addEncodingService($container);
         $container = $this->addFileSystemService($container);
@@ -61,7 +61,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function providePersistenceLayerDependencies(Container $container)
+    public function providePersistenceLayerDependencies(Container $container): Container
     {
         $container = $this->addCustomerQuery($container);
         $container = $this->addSalesOrderQuery($container);
@@ -124,7 +124,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function addCustomerQuery(Container $container)
+    public function addCustomerQuery(Container $container): Container
     {
         $container->set(static::PROPEL_QUERY_CUSTOMER, function (Container $container) {
             return $this->getCustomerQuery();
@@ -146,7 +146,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function addSalesOrderQuery(Container $container)
+    public function addSalesOrderQuery(Container $container): Container
     {
         $container->set(static::PROPEL_QUERY_SALES_ORDER, function (Container $container) {
             return $this->getSalesOrderQuery();
@@ -160,7 +160,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function addExportPlugins(Container $container)
+    public function addExportPlugins(Container $container): Container
     {
         $container->set(static::MINUBO_EXPORT_PLUGINS_STACK, function (Container $container) {
             return $this->getMinuboExportPluginStack();
@@ -170,9 +170,9 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface>
      */
-    protected function getMinuboExportPluginStack()
+    protected function getMinuboExportPluginStack(): array
     {
         return [
             new MinuboCustomerExportPlugin(),
@@ -185,7 +185,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addCustomerDataFilterPlugins($container)
+    protected function addCustomerDataFilterPlugins($container): Container
     {
         $container->set(static::MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK, function (Container $container) {
             return $this->getCustomerDataFilterPluginStack();
@@ -199,7 +199,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addOrderDataFilterPlugins($container)
+    protected function addOrderDataFilterPlugins($container): Container
     {
         $container->set(static::MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK, function (Container $container) {
             return $this->getOrderDataFilterPluginStack();
@@ -213,7 +213,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addCustomerDataExpanderPlugins($container)
+    protected function addCustomerDataExpanderPlugins($container): Container
     {
         $container->set(static::MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK, function (Container $container) {
             return $this->getCustomerDataExpanderPluginStack();
@@ -227,7 +227,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addOrderDataExpanderPlugins($container)
+    protected function addOrderDataExpanderPlugins($container): Container
     {
         $container->set(static::MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK, function (Container $container) {
             return $this->getOrderDataExpanderPluginStack();
@@ -237,9 +237,9 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface>
      */
-    protected function getCustomerDataFilterPluginStack()
+    protected function getCustomerDataFilterPluginStack(): array
     {
         return [
             new CustomerSecureFieldFilterPlugin(),
@@ -247,25 +247,25 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface>
      */
-    protected function getOrderDataFilterPluginStack()
+    protected function getOrderDataFilterPluginStack(): array
     {
         return [];
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface>
      */
-    protected function getCustomerDataExpanderPluginStack()
+    protected function getCustomerDataExpanderPluginStack(): array
     {
         return [];
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface>
      */
-    protected function getOrderDataExpanderPluginStack()
+    protected function getOrderDataExpanderPluginStack(): array
     {
         return [
             new StateFlagExpanderPlugin(),

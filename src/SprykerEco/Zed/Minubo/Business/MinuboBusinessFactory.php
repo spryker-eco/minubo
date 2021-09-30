@@ -84,41 +84,41 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface>
      */
-    public function getExportPlugins()
+    public function getExportPlugins(): array
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_EXPORT_PLUGINS_STACK);
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface>
      */
-    public function getCustomerDataFilterPlugins()
+    public function getCustomerDataFilterPlugins(): array
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK);
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface>
      */
-    public function getOrderDataFilterPlugins()
+    public function getOrderDataFilterPlugins(): array
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK);
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface>
      */
-    public function getCustomerDataExpandPlugins()
+    public function getCustomerDataExpandPlugins(): array
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK);
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface>
      */
-    public function getOrderDataExpandPlugins()
+    public function getOrderDataExpandPlugins(): array
     {
         return $this->getProvidedDependency(MinuboDependencyProvider::MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK);
     }

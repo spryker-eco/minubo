@@ -26,7 +26,7 @@ class MinuboToOmsFacadeBridge implements MinuboToOmsFacadeInterface
      * @param string $processName
      * @param string $stateName
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getStateFlags(string $processName, string $stateName): array
     {
