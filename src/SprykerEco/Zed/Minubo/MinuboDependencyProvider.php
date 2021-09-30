@@ -127,7 +127,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
     public function addCustomerQuery(Container $container)
     {
         $container->set(static::PROPEL_QUERY_CUSTOMER, function (Container $container) {
-            $this->getCustomerQuery();
+            return $this->getCustomerQuery();
         });
 
         return $container;
