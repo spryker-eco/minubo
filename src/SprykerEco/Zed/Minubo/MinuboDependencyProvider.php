@@ -21,28 +21,28 @@ use SprykerEco\Zed\Minubo\Dependency\Service\MinuboToUtilEncodingServiceBridge;
 
 class MinuboDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
-    const SERVICE_FILE_SYSTEM = 'SERVICE_FILE_SYSTEM';
+    public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
+    public const SERVICE_FILE_SYSTEM = 'SERVICE_FILE_SYSTEM';
 
-    const FACADE_OMS = 'FACADE_OMS';
+    public const FACADE_OMS = 'FACADE_OMS';
 
-    const PROPEL_QUERY_CUSTOMER = 'PROPEL_QUERY_CUSTOMER';
-    const PROPEL_QUERY_SALES_ORDER = 'PROPEL_QUERY_SALES_ORDER';
+    public const PROPEL_QUERY_CUSTOMER = 'PROPEL_QUERY_CUSTOMER';
+    public const PROPEL_QUERY_SALES_ORDER = 'PROPEL_QUERY_SALES_ORDER';
 
-    const MINUBO_EXPORT_PLUGINS_STACK = 'MINUBO_EXPORT_PLUGINS_STACK';
+    public const MINUBO_EXPORT_PLUGINS_STACK = 'MINUBO_EXPORT_PLUGINS_STACK';
 
-    const MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK = 'MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK';
-    const MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK = 'MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK';
+    public const MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK = 'MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK';
+    public const MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK = 'MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK';
 
-    const MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK = 'MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK';
-    const MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK = 'MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK';
+    public const MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK = 'MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK';
+    public const MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK = 'MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideBusinessLayerDependencies(Container $container)
+    public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = $this->addEncodingService($container);
         $container = $this->addFileSystemService($container);
@@ -61,7 +61,7 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function providePersistenceLayerDependencies(Container $container)
+    public function providePersistenceLayerDependencies(Container $container): Container
     {
         $container = $this->addCustomerQuery($container);
         $container = $this->addSalesOrderQuery($container);
@@ -76,9 +76,10 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addEncodingService(Container $container): Container
     {
-        $container[static::SERVICE_UTIL_ENCODING] = function (Container $container) {
+        $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
             return new MinuboToUtilEncodingServiceBridge($container->getLocator()->utilEncoding()->service());
-        };
+        });
+
         return $container;
     }
 
@@ -89,9 +90,10 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addFileSystemService(Container $container): Container
     {
-        $container[static::SERVICE_FILE_SYSTEM] = function (Container $container) {
+        $container->set(static::SERVICE_FILE_SYSTEM, function (Container $container) {
             return new MinuboToFileSystemServiceBridge($container->getLocator()->fileSystem()->service());
-        };
+        });
+
         return $container;
     }
 
@@ -102,9 +104,54 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addOmsFacade(Container $container): Container
     {
-        $container[static::FACADE_OMS] = function (Container $container) {
+        $container->set(static::FACADE_OMS, function (Container $container) {
             return new MinuboToOmsFacadeBridge($container->getLocator()->oms()->facade());
-        };
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return \Orm\Zed\Customer\Persistence\SpyCustomerQuery
+     */
+    protected function getCustomerQuery(): SpyCustomerQuery
+    {
+        return SpyCustomerQuery::create();
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addCustomerQuery(Container $container): Container
+    {
+        $container->set(static::PROPEL_QUERY_CUSTOMER, function (Container $container) {
+            return $this->getCustomerQuery();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return \Orm\Zed\Sales\Persistence\SpySalesOrderQuery;
+     */
+    protected function getSalesOrderQuery(): SpySalesOrderQuery
+    {
+        return SpySalesOrderQuery::create();
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addSalesOrderQuery(Container $container): Container
+    {
+        $container->set(static::PROPEL_QUERY_SALES_ORDER, function (Container $container) {
+            return $this->getSalesOrderQuery();
+        });
+
         return $container;
     }
 
@@ -113,47 +160,19 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function addCustomerQuery(Container $container)
+    public function addExportPlugins(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_CUSTOMER] = function (Container $container) {
-            return SpyCustomerQuery::create();
-        };
-
-        return $container;
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    public function addSalesOrderQuery(Container $container)
-    {
-        $container[static::PROPEL_QUERY_SALES_ORDER] = function (Container $container) {
-            return SpySalesOrderQuery::create();
-        };
-
-        return $container;
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    public function addExportPlugins(Container $container)
-    {
-        $container[static::MINUBO_EXPORT_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_EXPORT_PLUGINS_STACK, function (Container $container) {
             return $this->getMinuboExportPluginStack();
-        };
+        });
 
         return $container;
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface>
      */
-    protected function getMinuboExportPluginStack()
+    protected function getMinuboExportPluginStack(): array
     {
         return [
             new MinuboCustomerExportPlugin(),
@@ -166,11 +185,11 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addCustomerDataFilterPlugins($container)
+    protected function addCustomerDataFilterPlugins($container): Container
     {
-        $container[static::MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK, function (Container $container) {
             return $this->getCustomerDataFilterPluginStack();
-        };
+        });
 
         return $container;
     }
@@ -180,11 +199,11 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addOrderDataFilterPlugins($container)
+    protected function addOrderDataFilterPlugins($container): Container
     {
-        $container[static::MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK, function (Container $container) {
             return $this->getOrderDataFilterPluginStack();
-        };
+        });
 
         return $container;
     }
@@ -194,11 +213,11 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addCustomerDataExpanderPlugins($container)
+    protected function addCustomerDataExpanderPlugins($container): Container
     {
-        $container[static::MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK, function (Container $container) {
             return $this->getCustomerDataExpanderPluginStack();
-        };
+        });
 
         return $container;
     }
@@ -208,19 +227,19 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addOrderDataExpanderPlugins($container)
+    protected function addOrderDataExpanderPlugins($container): Container
     {
-        $container[static::MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK] = function (Container $container) {
+        $container->set(static::MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK, function (Container $container) {
             return $this->getOrderDataExpanderPluginStack();
-        };
+        });
 
         return $container;
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface>
      */
-    protected function getCustomerDataFilterPluginStack()
+    protected function getCustomerDataFilterPluginStack(): array
     {
         return [
             new CustomerSecureFieldFilterPlugin(),
@@ -228,25 +247,25 @@ class MinuboDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataFilterInterface>
      */
-    protected function getOrderDataFilterPluginStack()
+    protected function getOrderDataFilterPluginStack(): array
     {
         return [];
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface>
      */
-    protected function getCustomerDataExpanderPluginStack()
+    protected function getCustomerDataExpanderPluginStack(): array
     {
         return [];
     }
 
     /**
-     * @return \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface[]
+     * @return array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface>
      */
-    protected function getOrderDataExpanderPluginStack()
+    protected function getOrderDataExpanderPluginStack(): array
     {
         return [
             new StateFlagExpanderPlugin(),

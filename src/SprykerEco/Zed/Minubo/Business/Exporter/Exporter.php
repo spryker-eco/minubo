@@ -20,13 +20,13 @@ class Exporter implements ExporterInterface
     protected $entityManager;
 
     /**
-     * @var \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface[]
+     * @var array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface>
      */
     protected $exportPlugins;
 
     /**
      * @param \SprykerEco\Zed\Minubo\Persistence\MinuboEntityManagerInterface $entityManager
-     * @param \SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface[] $exportPlugins
+     * @param array<\SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface> $exportPlugins
      */
     public function __construct(MinuboEntityManagerInterface $entityManager, array $exportPlugins)
     {
@@ -37,7 +37,7 @@ class Exporter implements ExporterInterface
     /**
      * @return void
      */
-    public function exportData()
+    public function exportData(): void
     {
         $minuboRunEntityTransfer = new SpyMinuboRunEntityTransfer();
         $minuboRunEntityTransfer->setRanAt((new DateTime())->format(MinuboRepository::LAST_RUN_DATETIME_FORMAT));

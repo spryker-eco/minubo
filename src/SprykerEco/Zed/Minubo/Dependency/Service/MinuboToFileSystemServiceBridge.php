@@ -29,8 +29,8 @@ class MinuboToFileSystemServiceBridge implements MinuboToFileSystemServiceInterf
      *
      * @return void
      */
-    public function put(FileSystemContentTransfer $fileSystemContentTransfer): void
+    public function write(FileSystemContentTransfer $fileSystemContentTransfer): void
     {
-        $this->fileSystemService->put($fileSystemContentTransfer);
+        $this->fileSystemService->write($fileSystemContentTransfer);
     }
 }

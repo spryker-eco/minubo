@@ -72,7 +72,7 @@ class FileWriter implements WriterInterface
         $fileSystemContentTransfer->setContent($content);
         $fileSystemContentTransfer->setPath($this->getFileName($filePrefix));
 
-        $this->fileSystemService->put($fileSystemContentTransfer);
+        $this->fileSystemService->write($fileSystemContentTransfer);
     }
 
     /**
