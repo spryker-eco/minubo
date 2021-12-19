@@ -1,4 +1,7 @@
 <?php
+
+$jobs = $jobs ?? [];
+
 // Export order and customer data to Minubo every 15 minutes
 $jobs[] = [
     'name' => 'minubo-export',

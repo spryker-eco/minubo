@@ -13,11 +13,20 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @method \SprykerEco\Zed\Minubo\Business\MinuboFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Minubo\Persistence\MinuboRepositoryInterface getRepository()
+ * @method \SprykerEco\Zed\Minubo\Communication\MinuboCommunicationFactory getFactory()
  */
 class MinuboConsole extends Console
 {
-    const COMMAND_NAME = 'minubo:export:data';
-    const DESCRIPTION = 'Run export of data to Minubo';
+    /**
+     * @var string
+     */
+    public const COMMAND_NAME = 'minubo:export:data';
+
+    /**
+     * @var string
+     */
+    public const DESCRIPTION = 'Run export of data to Minubo';
 
     /**
      * @return void
@@ -36,7 +45,6 @@ class MinuboConsole extends Console
      */
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
-
         $this->getFacade()
             ->exportData();
 

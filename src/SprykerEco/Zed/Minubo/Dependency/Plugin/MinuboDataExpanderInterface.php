@@ -10,6 +10,8 @@ namespace SprykerEco\Zed\Minubo\Dependency\Plugin;
 interface MinuboDataExpanderInterface
 {
     /**
+     * @api
+     *
      * @param array $data
      *
      * @return array

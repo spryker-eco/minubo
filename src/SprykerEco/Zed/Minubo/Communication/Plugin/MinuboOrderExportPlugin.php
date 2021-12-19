@@ -18,6 +18,10 @@ use SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboExportPluginInterface;
 class MinuboOrderExportPlugin extends AbstractPlugin implements MinuboExportPluginInterface
 {
     /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @return void
      */
     public function exportData(): void

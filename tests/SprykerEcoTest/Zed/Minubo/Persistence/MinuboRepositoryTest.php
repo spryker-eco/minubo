@@ -8,13 +8,16 @@
 namespace SprykerEcotTest\Zed\Minubo;
 
 use Codeception\Test\Unit;
+use DateTime;
 use Generated\Shared\Transfer\SpyMinuboRunEntityTransfer;
-use Orm\Zed\Minubo\Persistence\SpyMinuboRun;
 use SprykerEco\Zed\Minubo\Persistence\MinuboEntityManager;
 use SprykerEco\Zed\Minubo\Persistence\MinuboRepository;
 
 class MinuboRepositoryTest extends Unit
 {
+    /**
+     * @var \SprykerEco\Zed\Minubo\Persistence\MinuboRepository
+     */
     private $minuboRepository;
 
     /**
@@ -37,7 +40,6 @@ class MinuboRepositoryTest extends Unit
      */
     private $order2;
 
-
     /**
      * @return void
      */
@@ -47,19 +49,18 @@ class MinuboRepositoryTest extends Unit
 
         $this->customer1 = $this->tester->haveCustomer();
         $this->order1 = $this->tester->haveOrder([
-            'unitPrice' => 100
+            'unitPrice' => 100,
         ], 'DummyPayment01');
         $this->order3 = $this->tester->haveOrder([
-            'unitPrice' => 100
+            'unitPrice' => 100,
         ], 'DummyPayment01');
         $this->setLastRunDateTime();
         $this->customer2 = $this->tester->haveCustomer();
         $this->order2 = $this->tester->haveOrder([
-            'unitPrice' => 100
+            'unitPrice' => 100,
         ], 'DummyPayment01');
 
         $this->minuboRepository = new MinuboRepository();
-
     }
 
     /**
@@ -92,7 +93,7 @@ class MinuboRepositoryTest extends Unit
     protected function setLastRunDateTime()
     {
         $lastRunTransfer = new SpyMinuboRunEntityTransfer();
-        $lastRunTransfer->setRanAt((new \DateTime())->format(MinuboRepository::LAST_RUN_DATETIME_FORMAT));
+        $lastRunTransfer->setRanAt((new DateTime())->format(MinuboRepository::LAST_RUN_DATETIME_FORMAT));
         (new MinuboEntityManager())->createMinuboLastRun($lastRunTransfer);
     }
 }

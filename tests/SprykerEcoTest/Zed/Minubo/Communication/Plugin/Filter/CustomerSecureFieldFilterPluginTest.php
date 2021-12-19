@@ -9,11 +9,13 @@ namespace SprykerEcoTest\Zed\Minubo;
 
 use Codeception\Test\Unit;
 use SprykerEco\Zed\Minubo\Communication\Plugin\Filter\CustomerSecureFieldFilterPlugin;
-use SprykerEco\Zed\Minubo\MinuboConfig;
 use SprykerEco\Zed\Minubo\Persistence\MinuboRepository;
 
 class CustomerSecureFieldFilterPluginTest extends Unit
 {
+    /**
+     * @var array<int, string>
+     */
     private $secureFields = [
         'password',
         'restore_password_date',

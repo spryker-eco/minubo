@@ -13,6 +13,8 @@ use SprykerEco\Shared\Minubo\MinuboConstants;
 class MinuboConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @return string
      */
     public function getFileSystemName(): string
@@ -21,6 +23,8 @@ class MinuboConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getBucketDirectory(): string
@@ -29,6 +33,8 @@ class MinuboConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return array
      */
     public function getCustomerSecureFields(): array
