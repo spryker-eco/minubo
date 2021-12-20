@@ -8,32 +8,21 @@
 namespace SprykerEcotTest\Zed\Minubo;
 
 use Codeception\Test\Unit;
-use DateTime;
 use Generated\Shared\Transfer\SpyMinuboRunEntityTransfer;
 use SprykerEco\Zed\Minubo\Persistence\MinuboEntityManager;
 use SprykerEco\Zed\Minubo\Persistence\MinuboRepository;
 
+/**
+ * @property \SprykerEcoTest\Zed\Minubo\MinuboZedTester tester
+ */
 class MinuboRepositoryTest extends Unit
 {
-    /**
-     * @var \SprykerEco\Zed\Minubo\Persistence\MinuboRepository
-     */
     private $minuboRepository;
 
     /**
      * @var \Generated\Shared\Transfer\CustomerTransfer
      */
-    private $customer1;
-
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     private $customer2;
-
-    /**
-     * @var \Generated\Shared\Transfer\SaveOrderTransfer
-     */
-    private $order1;
 
     /**
      * @var \Generated\Shared\Transfer\SaveOrderTransfer
@@ -47,20 +36,23 @@ class MinuboRepositoryTest extends Unit
     {
         parent::setUp();
 
-        $this->customer1 = $this->tester->haveCustomer();
-        $this->order1 = $this->tester->haveOrder([
-            'unitPrice' => 100,
+        $this->tester->haveCustomer();
+        $this->tester->haveOrder([
+            'unitPrice' => 100
         ], 'DummyPayment01');
-        $this->order3 = $this->tester->haveOrder([
-            'unitPrice' => 100,
+        $this->tester->haveOrder([
+            'unitPrice' => 100
         ], 'DummyPayment01');
+
+        usleep(1000000);
         $this->setLastRunDateTime();
         $this->customer2 = $this->tester->haveCustomer();
         $this->order2 = $this->tester->haveOrder([
-            'unitPrice' => 100,
+            'unitPrice' => 100
         ], 'DummyPayment01');
 
         $this->minuboRepository = new MinuboRepository();
+
     }
 
     /**
@@ -93,7 +85,7 @@ class MinuboRepositoryTest extends Unit
     protected function setLastRunDateTime()
     {
         $lastRunTransfer = new SpyMinuboRunEntityTransfer();
-        $lastRunTransfer->setRanAt((new DateTime())->format(MinuboRepository::LAST_RUN_DATETIME_FORMAT));
+        $lastRunTransfer->setRanAt((new \DateTime())->format(MinuboRepository::LAST_RUN_DATETIME_FORMAT));
         (new MinuboEntityManager())->createMinuboLastRun($lastRunTransfer);
     }
 }
