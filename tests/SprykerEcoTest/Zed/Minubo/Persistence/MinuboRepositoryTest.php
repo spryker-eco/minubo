@@ -9,18 +9,15 @@ namespace SprykerEcotTest\Zed\Minubo;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\SpyMinuboRunEntityTransfer;
-use Orm\Zed\Minubo\Persistence\SpyMinuboRun;
 use SprykerEco\Zed\Minubo\Persistence\MinuboEntityManager;
 use SprykerEco\Zed\Minubo\Persistence\MinuboRepository;
 
+/**
+ * @property \SprykerEcoTest\Zed\Minubo\MinuboZedTester tester
+ */
 class MinuboRepositoryTest extends Unit
 {
     private $minuboRepository;
-
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
-    private $customer1;
 
     /**
      * @var \Generated\Shared\Transfer\CustomerTransfer
@@ -30,13 +27,7 @@ class MinuboRepositoryTest extends Unit
     /**
      * @var \Generated\Shared\Transfer\SaveOrderTransfer
      */
-    private $order1;
-
-    /**
-     * @var \Generated\Shared\Transfer\SaveOrderTransfer
-     */
     private $order2;
-
 
     /**
      * @return void
@@ -45,13 +36,15 @@ class MinuboRepositoryTest extends Unit
     {
         parent::setUp();
 
-        $this->customer1 = $this->tester->haveCustomer();
-        $this->order1 = $this->tester->haveOrder([
+        $this->tester->haveCustomer();
+        $this->tester->haveOrder([
             'unitPrice' => 100
         ], 'DummyPayment01');
-        $this->order3 = $this->tester->haveOrder([
+        $this->tester->haveOrder([
             'unitPrice' => 100
         ], 'DummyPayment01');
+
+        usleep(1000000);
         $this->setLastRunDateTime();
         $this->customer2 = $this->tester->haveCustomer();
         $this->order2 = $this->tester->haveOrder([

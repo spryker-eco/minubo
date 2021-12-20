@@ -28,6 +28,10 @@ class CustomerSecureFieldFilterPlugin extends AbstractPlugin implements MinuboDa
     ];
 
     /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @param array $data
      *
      * @return array

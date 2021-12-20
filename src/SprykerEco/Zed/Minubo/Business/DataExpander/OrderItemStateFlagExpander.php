@@ -4,21 +4,52 @@
  * MIT License
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
+
 namespace SprykerEco\Zed\Minubo\Business\DataExpander;
 
 use SprykerEco\Zed\Minubo\Dependency\Facade\MinuboToOmsFacadeInterface;
 
 class OrderItemStateFlagExpander implements OrderItemStateFlagExpanderInterface
 {
-    const KEY_ITEMS = 'Items';
-    const KEY_PROCESS = 'Process';
-    const KEY_STATE = 'State';
-    const KEY_NAME = 'name';
-    const KEY_OMS_STATE_FLAGS = 'OmsStateFlags';
+    /**
+     * @var string
+     */
+    public const KEY_ITEMS = 'Items';
 
-    const KEY_TRANSITION_LOG = 'TransitionLogs';
-    const KEY_TARGET_STATE = 'target_state';
-    const KEY_OMS_TARGET_STATE_FLAGS = 'OmsTargetStateFlags';
+    /**
+     * @var string
+     */
+    public const KEY_PROCESS = 'Process';
+
+    /**
+     * @var string
+     */
+    public const KEY_STATE = 'State';
+
+    /**
+     * @var string
+     */
+    public const KEY_NAME = 'name';
+
+    /**
+     * @var string
+     */
+    public const KEY_OMS_STATE_FLAGS = 'OmsStateFlags';
+
+    /**
+     * @var string
+     */
+    public const KEY_TRANSITION_LOG = 'TransitionLogs';
+
+    /**
+     * @var string
+     */
+    public const KEY_TARGET_STATE = 'target_state';
+
+    /**
+     * @var string
+     */
+    public const KEY_OMS_TARGET_STATE_FLAGS = 'OmsTargetStateFlags';
 
     /**
      * @var array
@@ -60,6 +91,7 @@ class OrderItemStateFlagExpander implements OrderItemStateFlagExpanderInterface
                     $this->getOmsStateFlags($processName, $targetState);
             }
         }
+
         return $data;
     }
 

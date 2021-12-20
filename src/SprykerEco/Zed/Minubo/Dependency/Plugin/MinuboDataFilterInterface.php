@@ -10,6 +10,8 @@ namespace SprykerEco\Zed\Minubo\Dependency\Plugin;
 interface MinuboDataFilterInterface
 {
     /**
+     * @api
+     *
      * @param array $data
      *
      * @return array

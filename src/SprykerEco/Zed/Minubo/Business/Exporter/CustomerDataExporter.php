@@ -12,7 +12,10 @@ use SprykerEco\Zed\Minubo\Persistence\MinuboRepositoryInterface;
 
 class CustomerDataExporter implements DataExporterInterface
 {
-    const FILE_PREFIX = 'Customers';
+    /**
+     * @var string
+     */
+    public const FILE_PREFIX = 'Customers';
 
     /**
      * @var \SprykerEco\Zed\Minubo\Persistence\MinuboRepositoryInterface
@@ -46,7 +49,6 @@ class CustomerDataExporter implements DataExporterInterface
         array $expanderPlugins,
         WriterInterface $writer
     ) {
-
         $this->repository = $repository;
         $this->filterPlugins = $filterPlugins;
         $this->expanderPlugins = $expanderPlugins;

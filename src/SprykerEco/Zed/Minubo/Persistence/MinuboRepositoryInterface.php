@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Minubo\Persistence;
 interface MinuboRepositoryInterface
 {
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getLastMinuboRunTime(): ?string;
 

@@ -11,11 +11,13 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \SprykerEco\Zed\Minubo\Business\MinuboBusinessFactory getFactory()
+ * @method \SprykerEco\Zed\Minubo\Persistence\MinuboEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Minubo\Persistence\MinuboRepositoryInterface getRepository()
  */
 class MinuboFacade extends AbstractFacade implements MinuboFacadeInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -29,7 +31,7 @@ class MinuboFacade extends AbstractFacade implements MinuboFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -43,7 +45,7 @@ class MinuboFacade extends AbstractFacade implements MinuboFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -57,7 +59,7 @@ class MinuboFacade extends AbstractFacade implements MinuboFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

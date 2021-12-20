@@ -19,22 +19,59 @@ use SprykerEco\Zed\Minubo\Dependency\Facade\MinuboToOmsFacadeBridge;
 use SprykerEco\Zed\Minubo\Dependency\Service\MinuboToFileSystemServiceBridge;
 use SprykerEco\Zed\Minubo\Dependency\Service\MinuboToUtilEncodingServiceBridge;
 
+/**
+ * @method \SprykerEco\Zed\Minubo\MinuboConfig getConfig()
+ */
 class MinuboDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
+
+    /**
+     * @var string
+     */
     public const SERVICE_FILE_SYSTEM = 'SERVICE_FILE_SYSTEM';
 
+    /**
+     * @var string
+     */
     public const FACADE_OMS = 'FACADE_OMS';
 
+    /**
+     * @var string
+     */
     public const PROPEL_QUERY_CUSTOMER = 'PROPEL_QUERY_CUSTOMER';
+
+    /**
+     * @var string
+     */
     public const PROPEL_QUERY_SALES_ORDER = 'PROPEL_QUERY_SALES_ORDER';
 
+    /**
+     * @var string
+     */
     public const MINUBO_EXPORT_PLUGINS_STACK = 'MINUBO_EXPORT_PLUGINS_STACK';
 
+    /**
+     * @var string
+     */
     public const MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK = 'MINUBO_CUSTOMER_DATA_FILTER_PLUGINS_STACK';
+
+    /**
+     * @var string
+     */
     public const MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK = 'MINUBO_ORDER_DATA_FILTER_PLUGINS_STACK';
 
+    /**
+     * @var string
+     */
     public const MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK = 'MINUBO_CUSTOMER_DATA_EXPANDER_PLUGINS_STACK';
+
+    /**
+     * @var string
+     */
     public const MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK = 'MINUBO_ORDER_DATA_EXPANDER_PLUGINS_STACK';
 
     /**

@@ -25,10 +25,13 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
  */
 class MinuboRepository extends AbstractRepository implements MinuboRepositoryInterface
 {
-    const LAST_RUN_DATETIME_FORMAT = 'Y-m-d H:i:s.u';
+    /**
+     * @var string
+     */
+    public const LAST_RUN_DATETIME_FORMAT = 'Y-m-d H:i:s.u';
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getLastMinuboRunTime(): ?string
     {
@@ -103,6 +106,7 @@ class MinuboRepository extends AbstractRepository implements MinuboRepositoryInt
             $query->addAnd(SpyCustomerTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL)
                 ->addOr(SpyCustomerAddressTableMap::COL_UPDATED_AT, $lastRunTime, Criteria::GREATER_EQUAL);
         }
+
         return $query->find()->toArray();
     }
 }

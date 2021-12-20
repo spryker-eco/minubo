@@ -33,7 +33,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
     {
         return new Exporter(
             $this->getEntityManager(),
-            $this->getExportPlugins()
+            $this->getExportPlugins(),
         );
     }
 
@@ -46,7 +46,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
             $this->getRepository(),
             $this->getCustomerDataFilterPlugins(),
             $this->getCustomerDataExpandPlugins(),
-            $this->createFileWriter()
+            $this->createFileWriter(),
         );
     }
 
@@ -59,7 +59,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
             $this->getRepository(),
             $this->getOrderDataFilterPlugins(),
             $this->getOrderDataExpandPlugins(),
-            $this->createFileWriter()
+            $this->createFileWriter(),
         );
     }
 
@@ -71,7 +71,7 @@ class MinuboBusinessFactory extends AbstractBusinessFactory
         return new FileWriter(
             $this->getUtilEncodingService(),
             $this->getFileSystemService(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 

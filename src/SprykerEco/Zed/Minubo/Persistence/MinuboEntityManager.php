@@ -10,6 +10,9 @@ namespace SprykerEco\Zed\Minubo\Persistence;
 use Generated\Shared\Transfer\SpyMinuboRunEntityTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
+/**
+ * @method \SprykerEco\Zed\Minubo\Persistence\MinuboPersistenceFactory getFactory()
+ */
 class MinuboEntityManager extends AbstractEntityManager implements MinuboEntityManagerInterface
 {
     /**

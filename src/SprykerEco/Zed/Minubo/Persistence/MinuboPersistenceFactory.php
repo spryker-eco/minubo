@@ -15,6 +15,8 @@ use SprykerEco\Zed\Minubo\MinuboDependencyProvider;
 
 /**
  * @method \SprykerEco\Zed\Minubo\MinuboConfig getConfig()
+ * @method \SprykerEco\Zed\Minubo\Persistence\MinuboEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Minubo\Persistence\MinuboRepositoryInterface getRepository()
  */
 class MinuboPersistenceFactory extends AbstractPersistenceFactory
 {

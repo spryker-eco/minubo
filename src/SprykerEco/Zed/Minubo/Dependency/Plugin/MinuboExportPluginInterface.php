@@ -10,6 +10,8 @@ namespace SprykerEco\Zed\Minubo\Dependency\Plugin;
 interface MinuboExportPluginInterface
 {
     /**
+     * @api
+     *
      * @return void
      */
     public function exportData(): void;

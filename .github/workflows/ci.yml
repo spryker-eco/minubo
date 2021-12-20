@@ -25,9 +25,12 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.3', ]
                 product: [ 'suite' ]
-                composer_preference: ['', '--prefer-lowest']
+                config:
+                    - { php: '7.4', composer_preference: '' }
+                    - { php: '7.4', composer_preference: '--prefer-lowest' }
+                    - { php: '8.1', composer_preference: '' }
+
         services:
             rabbitmq:
                 image: rabbitmq
@@ -59,7 +62,7 @@ jobs:
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: ${{ matrix.php }}
+                    php-version: ${{ matrix.config.php }}
                     extensions: mbstring, intl
                     tools: composer:v2
 
@@ -72,16 +75,18 @@ jobs:
                 run: git clone https://github.com/spryker-eco/eco-ci.git ecoci
 
             -   name: Execute test script
-                run: ./ecoci/build/ga.sh ${{ matrix.composer_preference }}
+                run: ./ecoci/build/ga.sh ${{ matrix.config.composer_preference }}
     test_mariadb:
         name: "Test / MariaDB"
         runs-on: ubuntu-18.04
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.3', ]
                 product: [ 'suite' ]
-                composer_preference: [ '', '--prefer-lowest' ]
+                config:
+                    - { php: '7.4', composer_preference: '' }
+                    - { php: '7.4', composer_preference: '--prefer-lowest' }
+                    - { php: '8.1', composer_preference: '' }
         services:
             rabbitmq:
                 image: rabbitmq
@@ -108,7 +113,7 @@ jobs:
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: ${{ matrix.php }}
+                    php-version: ${{ matrix.config.php }}
                     extensions: mbstring, intl
                     tools: composer:v2
 
@@ -121,4 +126,4 @@ jobs:
                 run: git clone https://github.com/spryker-eco/eco-ci.git ecoci
 
             -   name: Execute test script
-                run: ./ecoci/build/ga.sh ${{ matrix.composer_preference }}
+                run: ./ecoci/build/ga.sh ${{ matrix.config.composer_preference }}

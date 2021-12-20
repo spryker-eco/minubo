@@ -8,12 +8,9 @@
 namespace SprykerEcoTest\Zed\Minubo;
 
 use Codeception\Test\Unit;
-use Codeception\TestCase\Test;
 use Spryker\Zed\Kernel\Container;
 use SprykerEco\Zed\Minubo\Business\DataExpander\OrderItemStateFlagExpander;
 use SprykerEco\Zed\Minubo\Business\MinuboFacade;
-use SprykerEco\Zed\Minubo\Business\Writer\FileWriter;
-use SprykerEco\Zed\Minubo\Dependency\Plugin\MinuboDataExpanderInterface;
 use SprykerEco\Zed\Minubo\MinuboDependencyProvider;
 use SprykerEco\Zed\Minubo\Persistence\MinuboRepository;
 
@@ -47,7 +44,6 @@ class MinuboFacadeTest extends Unit
         $this->order = $this->tester->haveOrder([
             'unitPrice' => 100,
         ], 'DummyPayment01');
-
     }
 
     /**
