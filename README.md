@@ -17,4 +17,4 @@ composer require spryker-eco/minubo
 
 ## Documentation
 
-[Documentation](https://documentation.spryker.com/industry_partners/performance/minubo.htm)
+[Documentation](https://docs.spryker.com/docs/scos/dev/technology-partner-guides/202204.0/marketing-and-conversion/analytics/installing-and-integrating-minubo.html)
